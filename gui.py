@@ -3,10 +3,6 @@ from tkinter import IntVar, ttk
 from voiceRecognition import hear
 from openAi import Travis
 import threading
-with open('./data/apikey.txt') as key:
-    api = key.readline()
-    
-mybot = Travis(api)
 
 def ask():
 
@@ -54,21 +50,26 @@ def download_file():
     # Start checking periodically if the thread has finished.
     schedule_check(t)
 
+if __name__ == "__main__":
 
-root = tk.Tk()
-root.title("Ask Open AI")
-root.geometry("250x200")
-check = IntVar()
-tick = ttk.Checkbutton(text='save response', variable=check)
+    with open('./data/apikey.txt') as key:
+        api = key.readline()
+        
+    mybot = Travis(api)
+    root = tk.Tk()
+    root.title("Ask Open AI")
+    root.geometry("250x200")
+    check = IntVar()
+    tick = ttk.Checkbutton(text='save response', variable=check)
 
-info_label = ttk.Label(text="Status: Idle")
-info_label.pack(side="top")
-tick.pack()
+    info_label = ttk.Label(text="Status: Idle")
+    info_label.pack(side="top")
+    tick.pack()
 
-download_button = ttk.Button(text="Ask Me", command=download_file)
-download_button.pack(pady=50)
+    download_button = ttk.Button(text="Ask Me", command=download_file)
+    download_button.pack(pady=50)
 
-cred = ttk.Label(text="github.com/Anas Dew")
-cred.pack(anchor='s', pady=3, side="bottom")
+    cred = ttk.Label(text="github.com/Anas Dew")
+    cred.pack(anchor='s', pady=3, side="bottom")
 
-root.mainloop()
+    root.mainloop()
